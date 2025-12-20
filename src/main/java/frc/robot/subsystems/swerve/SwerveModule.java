@@ -114,8 +114,14 @@ public class SwerveModule {
         // Ángulo actual del módulo medido por el encoder absoluto.
         Rotation2d encoderRotation = Rotation2d.fromRadians(io.getAbsoluteEncoderRadians());
 
-        // Velocidad objetivo y actual (en m/s).
-        double desiredFinalVel = desiredState.speedMetersPerSecond;
+        // Diferencia entre el ángulo deseado y el ángulo actual del módulo
+        // su coseno es la proyección de la velocidad deseada sobre la dirección actual
+        // esto evita que el módulo intente acelerar en una dirección diferente a la deseada
+        // lo que mejora la respuesta del swerve ante cambios rapidos de dirección.
+        double desiredFinalVel = desiredState.speedMetersPerSecond
+                * desiredState.angle.minus(encoderRotation).getCos();
+
+        // Velocidad objetivo y actual (en m/s). .
         double currentVel = Math.abs(io.getDriveMotorVelocityMetersPerSecond());
 
         // Dirección (ángulo) objetivo en radianes.
@@ -126,7 +132,7 @@ public class SwerveModule {
 
         // Limita la aceleración en función de capacidades del robot y estabilidad.
         double[] accLimits = accLimits(wantedAcc, wantedDirection);
-        // Si quieres activar estabilidad extra, descomenta:
+        // Si quieres activar estabilidad extra, descomenta: (aún en fase de pruebas)
         // accLimits = applyStabilityAssist(accLimits[0], accLimits[1], chassisRoll, chassisPitch);
 
         double limitedAcc = accLimits[0];

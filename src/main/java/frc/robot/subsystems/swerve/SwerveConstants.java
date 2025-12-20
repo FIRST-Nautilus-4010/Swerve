@@ -86,16 +86,6 @@ public final class SwerveConstants {
             (2.0 * Math.PI) / STR_RATIO;
 
     // --------------------------------------------------------------------
-    // MOTION MAGIC - DRIVE (VELOCIDAD)
-    // --------------------------------------------------------------------
-
-    /** Aceleración de Motion Magic para el motor de tracción (rot/s²). */
-    public static final double MAGIC_MOTION_ACC = 400.0;
-
-    /** Jerk de Motion Magic para el motor de tracción (rot/s³). */
-    public static final double MAGIC_MOTION_JERK = 4000.0;
-
-    // --------------------------------------------------------------------
     // MOTION MAGIC EXPO - STEER (POSICIÓN)
     // --------------------------------------------------------------------
 
@@ -103,10 +93,10 @@ public final class SwerveConstants {
     public static final double MAGIC_MOTION_VELOCITY_STR = 95.0;
 
     /** Aceleración de Motion Magic para el steer (rot/s²). */
-    public static final double MAGIC_MOTION_ACCELERATION_STR = 160.0;
+    public static final double MAGIC_MOTION_ACCELERATION_STR = 950;
 
     /** Jerk de Motion Magic para el steer (rot/s³). */
-    public static final double MAGIC_MOTION_JERK_STR = 160.0 * 10.0;
+    public static final double MAGIC_MOTION_JERK_STR = 9500;
 
     /**
      * Ganancia kV del modo Motion Magic Expo para el steer.

@@ -2,8 +2,9 @@ package frc.robot.subsystems.swerve;
 
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
-import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
+import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 /**
  * Encapsula la configuración y el control de un módulo swerve:
@@ -40,10 +41,10 @@ public class SwerveController {
     // --- Demandos (requests) de control ---
 
     /**
-     * Request de control para velocidad (Motion Magic Velocity) del motor de tracción.
+     * Request de control para velocidad del motor de tracción.
      * Usa el Slot0 de la configuración.
      */
-    private final MotionMagicVelocityVoltage velocityRequest;
+    private final VelocityVoltage velocityRequest;
 
     /**
      * Request de control para posición (Motion Magic Expo) del motor de giro.
@@ -65,8 +66,11 @@ public class SwerveController {
         this.driveConfig = new TalonFXConfiguration();
         this.turningConfig = new TalonFXConfiguration();
 
+        // Configura límites de corriente y modo neutral.
+        configureMotors();
+
         // Requests de control iniciales (valor 0, slot 0).
-        this.velocityRequest = new MotionMagicVelocityVoltage(0.0).withSlot(0);
+        this.velocityRequest = new VelocityVoltage(0.0).withSlot(0);
         this.positionRequest = new MotionMagicExpoVoltage(0.0).withSlot(0);
 
         // Configura gains de slots y parámetros de Motion Magic.
@@ -82,6 +86,23 @@ public class SwerveController {
     // --------------------------------------------------------------------
     // CONFIGURACIÓN
     // --------------------------------------------------------------------
+    
+    /**
+     * Configura los límites de corriente y el modo neutral de ambos motores.
+     */
+    private void configureMotors() {
+        driveConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
+        driveConfig.CurrentLimits.SupplyCurrentLimit = 40;
+        driveConfig.CurrentLimits.StatorCurrentLimitEnable = true;
+        driveConfig.CurrentLimits.StatorCurrentLimit = 120;
+        driveConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+
+        turningConfig.CurrentLimits.SupplyCurrentLimitEnable = true;
+        turningConfig.CurrentLimits.SupplyCurrentLimit = 40;
+        turningConfig.CurrentLimits.StatorCurrentLimitEnable = true;
+        turningConfig.CurrentLimits.StatorCurrentLimit = 120;
+        turningConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
+    }
 
     /**
      * Configura las ganancias del slot 0 del motor de tracción (velocidad).
@@ -117,18 +138,12 @@ public class SwerveController {
     }
 
     /**
-     * Configura los parámetros de Motion Magic para drive y steer.
+     * Configura los parámetros de Motion Magic para steer.
      * <ul>
-     *   <li>Drive: aceleración y jerk</li>
      *   <li>Steer: vel. crucero, aceleración, jerk y parámetros Expo</li>
      * </ul>
      */
     private void configureMotionMagic() {
-        // Motion Magic en el motor de tracción.
-        var driveMM = driveConfig.MotionMagic;
-        driveMM.MotionMagicAcceleration = SwerveConstants.MAGIC_MOTION_ACC;
-        driveMM.MotionMagicJerk = SwerveConstants.MAGIC_MOTION_JERK;
-
         // Motion Magic Expo en el motor de giro.
         var steerMM = turningConfig.MotionMagic;
         steerMM.MotionMagicCruiseVelocity = SwerveConstants.MAGIC_MOTION_VELOCITY_STR;

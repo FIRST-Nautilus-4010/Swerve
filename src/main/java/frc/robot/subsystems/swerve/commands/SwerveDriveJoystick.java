@@ -22,7 +22,7 @@ public class SwerveDriveJoystick extends Command {
 
     /** Deadzone de joystick en unidades de velocidad (m/s). */
     private static final double JOYSTICK_DEADZONE =
-            0.07 * ChassisConstants.MAX_VELOCITY;
+            0.1 * ChassisConstants.MAX_VELOCITY;
 
     /** Subsistema swerve controlado por este comando. */
     private final Swerve swerve;
