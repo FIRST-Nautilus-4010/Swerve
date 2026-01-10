@@ -142,7 +142,7 @@ public final class SwerveConstants {
     public static final double POS_KA = 0.01;
 
     /** kP: salida por unidad de error de posición (output / rotación). */
-    public static final double POS_KP = 4.8;
+    public static final double POS_KP = 50;
 
     /** kI: salida por unidad de error integrado de posición. */
     public static final double POS_KI = 0.0;
@@ -164,13 +164,13 @@ public final class SwerveConstants {
     public static final double VEL_KA = 0.001647;
 
     /** kP: salida por unidad de error de velocidad (output / rps). */
-    public static final double VEL_KP = 0.34;
+    public static final double VEL_KP = 0.4;
 
     /** kI: salida por unidad de error integrado de velocidad. */
     public static final double VEL_KI = 0.00;
 
     /** kD: salida por unidad de derivada del error de velocidad. */
-    public static final double VEL_KD = 0.003;
+    public static final double VEL_KD = 0.001;
 
     // --------------------------------------------------------------------
     // LIMITES DE ACELERACIÓN / ESTABILIDAD
