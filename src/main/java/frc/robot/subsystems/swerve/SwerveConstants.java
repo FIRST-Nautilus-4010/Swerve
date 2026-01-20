@@ -132,13 +132,13 @@ public final class SwerveConstants {
     public static final double POS_KA = 0.01;
 
     /** kP: salida por unidad de error de posición (output / rotación). */
-    public static final double POS_KP = 4.8;
+    public static final double POS_KP = 48;
 
     /** kI: salida por unidad de error integrado de posición. */
     public static final double POS_KI = 0.0;
 
     /** kD: salida por unidad de error de velocidad (derivada). */
-    public static final double POS_KD = 0.10;
+    public static final double POS_KD = 0.01;
 
     // --------------------------------------------------------------------
     // GANANCIAS DE CONTROL - VELOCIDAD (DRIVE)
@@ -154,33 +154,33 @@ public final class SwerveConstants {
     public static final double VEL_KA = 0.001647;
 
     /** kP: salida por unidad de error de velocidad (output / rps). */
-    public static final double VEL_KP = 0.34;
+    public static final double VEL_KP = 0.4;
 
     /** kI: salida por unidad de error integrado de velocidad. */
     public static final double VEL_KI = 0.00;
 
     /** kD: salida por unidad de derivada del error de velocidad. */
-    public static final double VEL_KD = 0.003;
+    public static final double VEL_KD = 0.001;
 
     // --------------------------------------------------------------------
     // LIMITES DE ACELERACIÓN / ESTABILIDAD
     // --------------------------------------------------------------------
 
     /** Aceleración máxima hacia adelante (m/s²) usada en el limitador. */
-    public static final double MAX_FORDWARD_ACCEL = 10.0;
+    public static final double MAX_FORDWARD_ACCEL = 17;
 
     /** Aceleración máxima frontal (m/s²) en el modelo de estabilidad. */
-    public static final double MAX_FRONT_ACCEL = 10.0;
+    public static final double MAX_FRONT_ACCEL = 17;
 
     /** Aceleración máxima lateral (m/s²) en el modelo de estabilidad. */
-    public static final double MAX_SIDE_ACCEL = 10.0;
+    public static final double MAX_SIDE_ACCEL = 17;
 
     /**
      * Coeficiente de fricción efectivo rueda-suelo.
      * <p>
      * Se usa solo para derivar la aceleración lateral máxima por skid.
      */
-    private static final double FRICTION_COF = 0.95;
+    private static final double FRICTION_COF = 1.3;
 
     /**
      * Aceleración máxima antes de patinar (skid) en m/s².

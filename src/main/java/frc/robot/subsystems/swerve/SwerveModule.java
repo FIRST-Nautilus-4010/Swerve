@@ -118,8 +118,7 @@ public class SwerveModule {
         // su coseno es la proyección de la velocidad deseada sobre la dirección actual
         // esto evita que el módulo intente acelerar en una dirección diferente a la deseada
         // lo que mejora la respuesta del swerve ante cambios rapidos de dirección.
-        double desiredFinalVel = desiredState.speedMetersPerSecond
-                * desiredState.angle.minus(encoderRotation).getCos();
+        double desiredFinalVel = desiredState.speedMetersPerSecond;
 
         // Velocidad objetivo y actual (en m/s). .
         double currentVel = Math.abs(io.getDriveMotorVelocityMetersPerSecond());
@@ -152,7 +151,7 @@ public class SwerveModule {
         if (Math.abs(desiredState.speedMetersPerSecond) < SwerveConstants.VELOCITY_DEADZONE) {
             controller.setVelocity(0.0);
         } else {
-            controller.setVelocity(optimizedState.speedMetersPerSecond);
+            controller.setVelocity(optimizedState.speedMetersPerSecond * optimizedState.angle.minus(encoderRotation).getCos());
         }
 
         // Aplica ángulo objetivo.
