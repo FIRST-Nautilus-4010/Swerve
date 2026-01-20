@@ -65,17 +65,17 @@ public final class Constants {
     public static final Pose2d initialPose = new Pose2d();
 
     // Ganancias PID para control de posición X.
-    public static final double P_X = 50.0;
+    public static final double P_X = 80.0;
     public static final double I_X = 0.0;
     public static final double D_X = 0.0;
 
     // Ganancias PID para control de posición Y.
-    public static final double P_Y = 50.0;
+    public static final double P_Y = 80.0;
     public static final double I_Y = 0.0;
     public static final double D_Y = 0.0;
 
     // Ganancias PID para control de ángulo (theta).
-    public static final double P_Z = 3.0;
+    public static final double P_Z = 60.0;
     public static final double I_Z = 0.0;
     public static final double D_Z = 0.0;
 
